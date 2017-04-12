@@ -1,10 +1,14 @@
 package com.jdbc.test;
-
+/**
+ * jdbc快速入门
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-public class JdbcFirstDemo {
+
+import com.mysql.jdbc.Driver;
+public class JdbcDemo1 {
 	public static void main(String[] args) throws Exception {
 		//要连接的数据库URL
 		String url="jdbc:mysql://localhost:3306/jdbcStudy";
@@ -15,17 +19,8 @@ public class JdbcFirstDemo {
 		
 		//1.加载驱动
 		//DriverManager.registerDriver(new com.mysql.jdbc.Driver()); 
-		//DriverManager.registerDriver(new Driver());
-		//不推荐使用这种方式来加载驱动
-		/*注意：在实际开发中并不推荐采用registerDriver方法注册驱动。
-		 * 原因有二：
-	　　1、查看Driver的源代码可以看到，如果采用此种方式，会导致驱动程序注册两次，
-				也就是在内存中会有两个Driver对象。
-	　　2、程序依赖mysql的api，脱离mysql的jar包，程序将无法编译，
-				将来程序切换底层数据库将会非常麻烦。
-		 */
-		Class.forName("com.mysql.jdbc.Driver");//推荐使用这种方式来加载驱动
-		
+		DriverManager.registerDriver(new Driver());
+	
 		//2.获取与数据库的连接
 		Connection con=DriverManager.getConnection(url, username, password);
 		
